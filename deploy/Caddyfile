@@ -1,0 +1,5 @@
+# /etc/caddy/Caddyfile — замените example.uz на ваш домен
+# Caddy сам получит и будет продлевать сертификат Let's Encrypt.
+example.uz, www.example.uz {
+	reverse_proxy 127.0.0.1:3000
+}

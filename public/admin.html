@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>DarkChat · Admin</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<section id="login" class="login" hidden>
+  <div class="card">
+    <h1>DarkChat Admin</h1>
+    <input id="pw" type="password" placeholder="Parol" autocomplete="current-password">
+    <button id="loginBtn" class="btn">Kirish</button>
+    <p id="loginErr" class="err"></p>
+  </div>
+</section>
+
+<section id="app" hidden>
+  <header>
+    <b>DarkChat · Admin</b>
+    <nav>
+      <button data-tab="stats" class="tab on">Statistika</button>
+      <button data-tab="users" class="tab">Foydalanuvchilar</button>
+      <button data-tab="groups" class="tab">Guruhlar</button>
+    </nav>
+    <span id="live" class="live"><i></i><span id="liveTxt">LIVE</span></span>
+    <button id="logoutBtn" class="btn ghost">Chiqish</button>
+  </header>
+  <main>
+    <div id="view"></div>
+    <p id="msg" class="err"></p>
+  </main>
+</section>
+<script src="admin.js"></script>
+</body>
+</html>

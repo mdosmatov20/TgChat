@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="logo-dark.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DarkChat</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&family=Unbounded:wght@600;700&display=swap">
+<script>try{var d=localStorage.getItem('dc_design');if(d)document.documentElement.setAttribute('data-design',d)}catch(e){}</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="#" aria-label="DarkChat">
+    <span class="logo">
+      <img class="light" src="logo-light.png" alt="DarkChat">
+      <img class="dark" src="logo-dark.png" alt="" aria-hidden="true">
+    </span>
+    <span class="brand-name">DarkChat</span>
+  </a>
+  <nav class="auth-pending">
+    <button class="btn" type="button" id="login" data-i18n="login">Войти</button>
+    <button class="btn primary" type="button" id="signup" data-i18n="signup">Зарегистрироваться</button>
+    <button class="btn danger" type="button" id="logout" hidden data-i18n="logout">Выйти</button>
+    <div class="theme">
+      <button class="btn" type="button" id="themeBtn" aria-haspopup="true" aria-expanded="false" data-i18n="theme">Тема</button>
+      <div class="menu" id="menu" role="menu">
+        <button class="opt" role="menuitemradio" aria-checked="true" data-theme="light"><i class="dot"></i><span data-i18n="theme_light">Светлая</span></button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-theme="dark"><i class="dot"></i><span data-i18n="theme_dark">Тёмная</span></button>
+      </div>
+    </div>
+    <div class="theme design-wrap">
+      <button class="btn" type="button" id="designBtn" aria-haspopup="true" aria-expanded="false" data-i18n="design">Дизайн</button>
+      <div class="menu design-menu" id="designMenu" role="menu">
+        <button class="opt" role="menuitemradio" aria-checked="true" data-design="aurora"><i class="sw"></i><span data-i18n="d_aurora">Аврора</span></button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-design="ocean"><i class="sw"></i><span data-i18n="d_ocean">Океан</span></button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-design="sunset"><i class="sw"></i><span data-i18n="d_sunset">Закат</span></button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-design="forest"><i class="sw"></i><span data-i18n="d_forest">Лес</span></button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-design="sakura"><i class="sw"></i><span data-i18n="d_sakura">Сакура</span></button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-design="violet"><i class="sw"></i><span data-i18n="d_violet">Фиалка</span></button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-design="graphite"><i class="sw"></i><span data-i18n="d_graphite">Графит</span></button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-design="amber"><i class="sw"></i><span data-i18n="d_amber">Янтарь</span></button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-design="ruby"><i class="sw"></i><span data-i18n="d_ruby">Рубин</span></button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-design="neon"><i class="sw"></i><span data-i18n="d_neon">Неон</span></button>
+      </div>
+    </div>
+    <div class="theme">
+      <button class="btn" type="button" id="langBtn" aria-haspopup="true" aria-expanded="false" data-i18n="language">Язык</button>
+      <div class="menu" id="langMenu" role="menu">
+        <button class="opt" role="menuitemradio" aria-checked="true" data-lang="ru"><i class="dot"></i>Русский</button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-lang="en"><i class="dot"></i>English</button>
+        <button class="opt" role="menuitemradio" aria-checked="false" data-lang="uz"><i class="dot"></i>Oʻzbekcha</button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main id="home">
+  <h1 id="greeting" data-i18n-html="greeting">Здравствуйте, вы на сайте <span>DarkChat</span></h1>
+  <div class="home-actions" id="homeActions" hidden>
+    <button class="big-btn" type="button" data-act="contact" data-i18n="add_contact">Добавить контакт</button>
+    <button class="big-btn" type="button" data-act="newgroup" data-i18n="new_group">Создать группу</button>
+    <button class="big-btn" type="button" data-act="joingroup" data-i18n="join_group">Присоединиться к группе</button>
+  </div>
+</main>
+
+<div class="app" id="app" hidden>
+  <aside class="side">
+    <div class="side-top">
+      <button class="icon-btn" id="gear" type="button" title="Настройки" data-i18n-title="settings" aria-label="Настройки" data-i18n-aria="settings" hidden></button>
+      <input class="search" id="search" type="search" placeholder="Поиск" data-i18n-ph="search" autocomplete="off">
+    </div>
+    <div class="list" id="list"></div>
+    <div class="fab-wrap">
+      <div class="pop up" id="fabMenu">
+        <button type="button" data-act="contact" data-i18n="add_contact">Добавить контакт</button>
+        <button type="button" data-act="newgroup" data-i18n="new_group">Создать группу</button>
+        <button type="button" data-act="joingroup" data-i18n="join_group">Присоединиться к группе</button>
+      </div>
+      <button class="fab" id="fab" type="button" aria-label="Новый чат" data-i18n-aria="new_chat"></button>
+    </div>
+  </aside>
+  <section class="chat">
+    <div class="empty" id="empty" data-i18n="pick_chat">Выберите чат, чтобы начать общение</div>
+    <div class="chat-in" id="chatIn" hidden>
+      <div class="chat-head">
+        <button class="icon-btn back" id="back" type="button" aria-label="К списку чатов" data-i18n-aria="to_chats"></button>
+        <div class="who" id="who"></div>
+        <button class="icon-btn screen-share-btn" id="screenShareBtn" type="button" hidden title="Экран" aria-label="Экран">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4M9 11l3-3 3 3M12 8v6"/>
+          </svg>
+        </button>
+        <button class="icon-btn video-chat-btn" id="videoChatBtn" type="button" hidden title="Видеочат" aria-label="Видеочат">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3.6L12 22l4.4-5H20c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+            <path d="M8.2 7.2h1.6v6.2H8.2zm3-1.5h1.6v9.2h-1.6zm3 2.8h1.6v3.6h-1.6z" fill="var(--bg)"/>
+          </svg>
+        </button>
+        <div class="dots-wrap">
+          <button class="icon-btn" id="dots" type="button" aria-label="Меню чата" data-i18n-aria="chat_menu"></button>
+          <div class="pop right" id="dotsMenu"></div>
+        </div>
+      </div>
+      <div class="reqbar" id="reqbar" hidden></div>
+      <div class="gcbar" id="gcBar" hidden></div>
+      <div class="msgs" id="msgs"></div>
+      <div class="upbar" id="upbar" hidden><span id="upTxt"></span><button class="link-btn" type="button" id="upCancel" data-i18n="cancel">Отменить</button></div>
+      <div class="upbar editbar" id="editbar" hidden><span class="et"><b data-i18n="editing">Редактирование</b> · <span id="editTxt"></span></span><button class="link-btn" type="button" id="editCancel" data-i18n="cancel">Отменить</button></div>
+      <div class="composer" id="composer">
+        <button class="icon-btn attach" id="attach" type="button" data-i18n-aria="attach" data-i18n-title="attach" aria-label="Прикрепить файл"></button>
+        <input type="file" id="mediaFile" hidden>
+        <div class="rec-ui" id="recUi"><i class="rec-dot"></i><span class="rec-time" id="recTime">0:00</span><span class="rec-hint" id="recHint"></span></div>
+        <textarea id="text" rows="1" maxlength="4000" placeholder="Сообщение" data-i18n-ph="message"></textarea>
+        <button class="send mic" id="mic" type="button" data-i18n-aria="vm_record" data-i18n-title="vm_record" aria-label="Голосовое сообщение"></button>
+        <button class="send" id="send" type="button" aria-label="Отправить" data-i18n-aria="send"></button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="pop" id="msgMenu" role="menu"></div>
+
+<div class="overlay" id="overlay">
+  <section class="modal" id="loginModal" role="dialog" aria-modal="true" aria-label="Вход" data-i18n-aria="login_title">
+    <form novalidate>
+      <span class="logo mlogo"><img class="light" src="logo-light.png" alt="DarkChat"><img class="dark" src="logo-dark.png" alt="" aria-hidden="true"></span>
+      <h2>DarkChat</h2>
+      <p class="sub" data-i18n="enter_email_pass">Введите адрес электронной почты и пароль</p>
+      <div class="field"><input id="l-email" data-f="email" type="email" autocomplete="email" placeholder=" "><label for="l-email" data-i18n="email">Адрес электронной почты</label></div>
+      <div class="field"><input id="l-pass" data-f="password" type="password" autocomplete="current-password" placeholder=" "><label for="l-pass" data-i18n="password">Пароль</label></div>
+      <p class="form-error" role="alert"></p>
+      <label class="remember"><input type="checkbox" checked><span data-i18n="remember">Запомнить меня</span></label>
+      <div class="actions">
+        <button class="link-btn" type="button" id="doLogin" data-i18n="login">Войти</button>
+        <button class="link-btn" type="button" data-close data-i18n="back">Назад</button>
+      </div>
+    </form>
+  </section>
+  <section class="modal dyn" id="dyn" role="dialog" aria-modal="true"></section>
+  <section class="modal" id="signupModal" role="dialog" aria-modal="true" aria-label="Регистрация" data-i18n-aria="signup_title">
+    <form novalidate>
+      <span class="logo mlogo"><img class="light" src="logo-light.png" alt="DarkChat"><img class="dark" src="logo-dark.png" alt="" aria-hidden="true"></span>
+      <h2>DarkChat</h2>
+      <p class="sub" data-i18n="enter_email_pass">Введите адрес электронной почты и пароль</p>
+      <div class="field"><input id="s-name" data-f="name" type="text" autocomplete="name" maxlength="40" placeholder=" "><label for="s-name" data-i18n="name">Имя</label></div>
+      <div class="field"><input id="s-nick" data-f="nick" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="33" placeholder=" "><label for="s-nick" data-i18n="nick">Никнейм</label></div>
+      <div class="field"><input id="s-email" data-f="email" type="email" autocomplete="email" placeholder=" "><label for="s-email" data-i18n="email">Адрес электронной почты</label></div>
+      <div class="field"><input id="s-pass" data-f="password" type="password" autocomplete="new-password" placeholder=" "><label for="s-pass" data-i18n="password">Пароль</label></div>
+      <div class="field"><input id="s-pass2" data-f="password2" type="password" autocomplete="new-password" placeholder=" "><label for="s-pass2" data-i18n="password2">Повторите пароль</label></div>
+      <p class="form-error" role="alert"></p>
+      <label class="remember"><input type="checkbox" checked><span data-i18n="remember">Запомнить меня</span></label>
+      <div class="actions">
+        <button class="link-btn" type="button" id="doSignup" data-i18n="signup">Зарегистрироваться</button>
+        <button class="link-btn" type="button" data-close data-i18n="back">Назад</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<script src="i18n.js"></script>
+<script src="design.js"></script>
+<script src="screenshare.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

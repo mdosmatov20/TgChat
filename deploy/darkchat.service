@@ -1,0 +1,28 @@
+# /etc/systemd/system/darkchat.service
+[Unit]
+Description=DarkChat
+After=network.target
+
+[Service]
+Type=simple
+User=darkchat
+WorkingDirectory=/opt/darkchat
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=3
+Environment=NODE_ENV=production
+Environment=PORT=3000
+# слушаем только локально — наружу сайт отдаёт Caddy
+Environment=HOST=127.0.0.1
+# HTTPS делает Caddy
+Environment=HTTPS=0
+# настоящий IP посетителя берём из заголовков Caddy (нужно для защиты от подбора паролей)
+Environment=TRUST_PROXY=1
+# TURN для звонков между разными сетями (см. DEPLOY.md, шаг 7). Замените домен и секрет!
+Environment=TURN_URL=turn:example.uz:3478?transport=udp,turn:example.uz:3478?transport=tcp
+Environment=TURN_SECRET=ЗАМЕНИТЕ_НА_ДЛИННЫЙ_СЛУЧАЙНЫЙ_СЕКРЕТ
+# админ-панель (/admin.html). Без этой переменной панель выключена. Замените пароль!
+Environment=ADMIN_PASSWORD=adminpass
+
+[Install]
+WantedBy=multi-user.target
